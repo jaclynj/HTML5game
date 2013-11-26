@@ -1,8 +1,9 @@
 // TODO:
 // [DONE] enemies keep coming after you shoot them
 // [DONE] make lose conditions/health (if you get hit a certain amount of times the game resets)
-// Display score and lives on screen
-// Display 'READY', 'BEGIN', 'GAME OVER' [click to start]
+// [DONE] Display score and lives on screen
+// [DONE] Display 'GAME OVER' and press space to start
+// Display 'READY', 'BEGIN',
 // spawn more enemies with time
 // faster enemies with time
 // pause
@@ -47,20 +48,29 @@ function update() {
   bulletDetectCollision(); //detects if bullet hits enemy
   enemyMovement();
   enemyDetectCollision();
-  loseConditions();
 }
 
 //DRAW
 function draw() {
-  canvasContext.clearRect(0, 0, canvasElement.width, canvasElement.height);
-  player.draw(); //runs draw function in player function
-  enemy1.draw();
-  enemy2.draw();
 
-  //DRAWS BULLETS
-  if (playerBullets.length > 0) {
-    for(var i=0; i<playerBullets.length; i++) {
-      playerBullets[i].draw();
+  canvasContext.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+  //if player loses
+  if (lives < 1) {
+  loseConditions();
+
+  // else render the game normally
+  } else {
+    menu.draw();
+    player.draw(); //runs draw function in player function
+    enemy1.draw();
+    enemy2.draw();
+
+    //DRAWS BULLETS
+    if (playerBullets.length > 0) {
+      for(var i=0; i<playerBullets.length; i++) {
+        playerBullets[i].draw();
+      }
     }
   }
 }
@@ -85,6 +95,16 @@ var player = {
     // 0 is start drawing and Math is the circumference, false just means dont draw in wrong direction
     canvasContext.closePath(); //ends drawing
     canvasContext.fill(); //fills it
+  }
+};
+
+//SET MENU
+
+var menu = {
+  draw: function(){
+    canvasContext.font="24px Helvetica";
+    canvasContext.fillStyle="#063FFF";
+    canvasContext.fillText("Lives: "+lives+" | Kills: "+enemiesKilled, 15, 30);
   }
 };
 
@@ -133,7 +153,11 @@ function Bullet() {
 //LOSE CONDITIONS
 
 function loseConditions() {
-  if (lives < 1) {
+  canvasContext.font="24px Helvetica";
+  canvasContext.fillText("GAME OVER",230,canvasElement.height/2);
+  canvasContext.font="18px Helvetica";
+  canvasContext.fillText("Press space to play again",200,canvasElement.height/1.8);
+  if (32 in keysDown) {
     reset();
   }
 }
@@ -145,6 +169,7 @@ function reset() {
   player.y = 380;
   player.color = "#FFF360";
   lives = 5;
+  enemiesKilled = 0;
   enemy1.y = -100;
   enemy1.x = 32 + (Math.random() * (canvasElement.width - 64));
   enemy2.y = -100;

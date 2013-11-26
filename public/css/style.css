@@ -2,7 +2,7 @@ body {
   background-color: #E3F7FC;
   color: #FF6192;
   font-family: 'Orbitron', sans-serif;
-  font-size: 12px;
+  font-size: 25px;
   margin: 0 auto;
   text-align: center;
 }
@@ -15,5 +15,5 @@ canvas {
 }
 
 h1 {
-  font-size: 4em;
+  font-size: 2em;
 }
