@@ -1,10 +1,12 @@
 // TODO:
-// enemies keep coming after you shoot them
-// make lose conditions/health (if you get hit a certain amount of times the game resets)
-// make win conditions (?) big boss?
-// make enemies harder the further you get (faster enemies, more spawning)
-// make score
+// [DONE] enemies keep coming after you shoot them
+// [DONE] make lose conditions/health (if you get hit a certain amount of times the game resets)
+// Display score and lives on screen
+// Display 'READY', 'BEGIN', 'GAME OVER' [click to start]
+// spawn more enemies with time
+// faster enemies with time
 // pause
+// make win conditions (?) big boss?
 // better graphics
 // add music
 // powerups
@@ -45,6 +47,7 @@ function update() {
   bulletDetectCollision(); //detects if bullet hits enemy
   enemyMovement();
   enemyDetectCollision();
+  loseConditions();
 }
 
 //DRAW
@@ -62,7 +65,10 @@ function draw() {
   }
 }
 
+// * FUNCTIONS & VARIABLES THAT SET OBJECTS *
+
 //SET PLAYER
+var lives = 5;
 var player = {
   color: "#FFF360",
   x: 300,
@@ -122,6 +128,32 @@ function Bullet() {
 }
 
 
+//* GAME UPDATE FUNCTIONS *
+
+//LOSE CONDITIONS
+
+function loseConditions() {
+  if (lives < 1) {
+    reset();
+  }
+}
+
+//RESETS GAME
+
+function reset() {
+  player.x = 300;
+  player.y = 380;
+  player.color = "#FFF360";
+  lives = 5;
+  enemy1.y = -100;
+  enemy1.x = 32 + (Math.random() * (canvasElement.width - 64));
+  enemy2.y = -100;
+  enemy2.x = 32 + (Math.random() * (canvasElement.width - 64));
+  enemies = [];
+  enemies.push(enemy1);
+  enemies.push(enemy2);
+}
+
 //MOVES BULLET
 function bulletMovement() {
   if (playerBullets.length > 0) {
@@ -144,7 +176,7 @@ function bulletDetectCollision(thisBullet){
   for (var i=0; i<playerBullets.length; i++) {
     thisBullet = playerBullets[i];
     for (var i=0; i<enemies.length; i++) {
-      enemy = enemies[i];
+      var enemy = enemies[i];
       if (
         thisBullet.x <= (enemy.x + 32)
         && enemy.x <= (thisBullet.x + 32)
@@ -194,21 +226,34 @@ function playerMovement(){
 
 //ENEMY MOVEMENT
 function enemyMovement(){
-  enemy2.y += enemy2.speed;
-  enemy1.y += enemy1.speed;
+  for (var i=0; i<enemies.length; i++) {
+    var enemy = enemies[i];
+    enemy.y += enemy.speed;
+    //this resets enemy if if moves out of screen
+    if (enemy.y > canvasElement.height + enemy.height) {
+      enemy.y = -100;
+      enemy.x = 32 + (Math.random() * (canvasElement.width - 64));
+      lives = lives - 1;
+      console.log(lives);
+    }
+  }
 }
 
 //IF ENEMY & PLAYER TOUCH
 function enemyDetectCollision() {
   for (var i=0; i<enemies.length; i++) {
-    var enemy = enemies[i]
+    var enemy = enemies[i];
     if (
       player.x <= (enemy.x + 32)
       && enemy.x <= (player.x + 32)
       && player.y <= (enemy.y + 32)
       && enemy.y <= (player.y + 32)
       ) {
+      enemy.y = -100;
+      enemy.x = 32 + (Math.random() * (canvasElement.width - 64));
+      lives = lives - 1;
       player.color = "red";
+      console.log(lives);
     }
   }
 }
