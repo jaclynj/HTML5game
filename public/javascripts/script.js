@@ -1,106 +1,57 @@
-// TODO:
-// [DONE] enemies keep coming after you shoot them
-// [DONE] make lose conditions/health (if you get hit a certain amount of times the game resets)
-// [DONE] Display score and lives on screen
-// [DONE] Display 'GAME OVER' and press space to start
-// Display 'READY', 'BEGIN',
-// spawn more enemies with time
-// faster enemies with time
-// pause
-// make win conditions (?) big boss?
-// better graphics
-// add music
-// powerups
-
-
+var Game = Game || {};
 
 //DEFINES THE CANVAS
-var canvasElement = document.getElementById("myCanvas");
-if (canvasElement.getContext){
-  var canvasContext = canvasElement.getContext("2d"); //this is the context, in this case, 2D
+Game.canvas = document.getElementById("myCanvas");
+if (Game.canvas.getContext){
+Game.context = Game.canvas.getContext("2d"); //this is the context, in this case, 2D
 }
-canvasElement.width = 600;
-canvasElement.height = 450;
+Game.canvas.width = 600;
+Game.canvas.height = 450;
 
 //FRAMES PER SECOND
-var FPS = 60;
-setInterval( function() { //setInterval is a function that calls update & draw
+Game.FPS = 60;
+//setInterval is a function that calls update & draw
+setInterval( function() {
   update();
   draw();
-}, 1000/FPS );
+}, 1000/Game.FPS );
 
-
-//MOVEMENTS
-var keysDown = {}; //allows for listening for multiple keypresses so you can move diagnally
-
-addEventListener( "keydown", function(key) {
-  keysDown[key.keyCode] = true;
-});
-
-addEventListener( "keyup", function(key) {
-  delete keysDown[key.keyCode];
-});
 
 // UPDATE
-function update() {
+Game.update = function() {
   playerMovement();
   bulletMovement(); //moves bullets
   bulletDetectCollision(); //detects if bullet hits enemy
   enemyMovement();
   enemyDetectCollision();
-}
+} // TODO main.js
 
 //DRAW
-function draw() {
-
+Game.draw = function() {
   canvasContext.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
   //if player loses
   if (lives < 1) {
   loseConditions();
-
   // else render the game normally
   } else {
     menu.draw();
-    player.draw(); //runs draw function in player function
+    player.draw();
     enemy1.draw();
     enemy2.draw();
 
     //DRAWS BULLETS
-    if (playerBullets.length > 0) {
-      for(var i=0; i<playerBullets.length; i++) {
-        playerBullets[i].draw();
-      }
+    for(var i=0; i<playerBullets.length; i++) {
+      playerBullets[i].draw();
     }
   }
 }
 
 // * FUNCTIONS & VARIABLES THAT SET OBJECTS *
 
-//SET PLAYER
-var lives = 5;
-var player = {
-  color: "#FFF360",
-  x: 300,
-  y: 380,
-  radius: 20,
-  width: 20,
-  height: 20,
-  speed: 6,
-  draw: function() {
-    canvasContext.fillStyle = this.color;
-    canvasContext.beginPath(); //starts drawing
-    canvasContext.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
-    //high point of circle, radius is width of circle,
-    // 0 is start drawing and Math is the circumference, false just means dont draw in wrong direction
-    canvasContext.closePath(); //ends drawing
-    canvasContext.fill(); //fills it
-  }
-};
-
 //SET MENU
 
-var menu = {
+Game.menu = {
   draw: function(){
     canvasContext.font="24px Helvetica";
     canvasContext.fillStyle="#063FFF";
@@ -109,54 +60,24 @@ var menu = {
 };
 
 //SET ENEMY
-var enemy1 = new Enemy();
-var enemy2 = new Enemy();
 
-var enemies = [];
+Game.enemy1 = new Enemy();
+Game.enemy2 = new Enemy();
 
-enemies.push(enemy1);
-enemies.push(enemy2);
+Game.enemies = [];
 
-function Enemy() {
-  this.color = "#063FFF",
-  this.x = 32 + (Math.random() * (canvasElement.width - 64)),
-  this.y = -10,
-  this.width = 20,
-  this.height = 20,
-  this.speed = 2,
-  this.draw = function() {
-    canvasContext.fillStyle = this.color;
-    canvasContext.fillRect(this.x, this.y, this.width, this.height);
-  }
-}
-
-
-//SET PROJECTILE
-var playerBullets = [];
-function Bullet() {
-  this.color = "#FFF360",
-  this.x = player.x,
-  this.y = player.y,
-  this.width = 5,
-  this.height = 8,
-  this.speed = 15,
-  this.range = 100,
-  this.draw = function() {
-    canvasContext.fillStyle = this.color;
-    canvasContext.fillRect(this.x, this.y, this.width, this.height);
-  }
-}
-
+Game.enemies.push(enemy1);
+Game.enemies.push(enemy2);
 
 //* GAME UPDATE FUNCTIONS *
 
 //LOSE CONDITIONS
 
-function loseConditions() {
-  canvasContext.font="24px Helvetica";
-  canvasContext.fillText("GAME OVER",230,canvasElement.height/2);
-  canvasContext.font="18px Helvetica";
-  canvasContext.fillText("Press space to play again",200,canvasElement.height/1.8);
+Menu.prototype.loseConditions = function() {
+  Game.context.font="24px Helvetica";
+  Game.context.fillText("GAME OVER",230,canvasElement.height/2);
+  Game.context.font="18px Helvetica";
+  Game.context.fillText("Press space to play again",200,canvasElement.height/1.8);
   if (32 in keysDown) {
     reset();
   }
@@ -164,12 +85,12 @@ function loseConditions() {
 
 //RESETS GAME
 
-function reset() {
-  player.x = 300;
-  player.y = 380;
-  player.color = "#FFF360";
-  lives = 5;
-  enemiesKilled = 0;
+Game.prototype.reset =function() {
+  Game.player.x = 300;
+  Game.player.y = 380;
+  Game.player.color = "#FFF360";
+  Game.lives = 5;
+  Game.enemiesKilled = 0;
   enemy1.y = -100;
   enemy1.x = 32 + (Math.random() * (canvasElement.width - 64));
   enemy2.y = -100;
@@ -179,126 +100,7 @@ function reset() {
   enemies.push(enemy2);
 }
 
-//MOVES BULLET
-function bulletMovement() {
-  if (playerBullets.length > 0) {
-    for(var i=0; i<playerBullets.length; i++) {
-      var thisBullet = playerBullets[i];
-      thisBullet.y -= thisBullet.speed;
-    //this eliminates bullets that get out of range
-      if (thisBullet.y < thisBullet.range) {
-        playerBullets.splice(i, i+1);
-        playerBullets.splice(3, playerBullets.length);
-      }
-    }
-  }
-}
-
 //IF BULLET TOUCHES ENEMY
-var enemiesKilled = 0;
-
-function bulletDetectCollision(thisBullet){
-  for (var i=0; i<playerBullets.length; i++) {
-    thisBullet = playerBullets[i];
-    for (var i=0; i<enemies.length; i++) {
-      var enemy = enemies[i];
-      if (
-        thisBullet.x <= (enemy.x + 32)
-        && enemy.x <= (thisBullet.x + 32)
-        && thisBullet.y <= (enemy.y + 32)
-        && enemy.y <= (thisBullet.y + 32)
-        ) {
-        enemy.y = -100;
-        enemy.x = 32 + (Math.random() * (canvasElement.width - 64));
-        enemiesKilled += 1;
-        console.log(enemiesKilled);
-      }
-    }
-  }
-}
-
-//PLAYER MOVEMENTS & PREVENTS PLAYER FROM MOVING OFF SCREEN
-function playerMovement(){
-  if (87 in keysDown) {
-    if (player.y > player.radius) {
-      player.y -= player.speed;
-    }
-  } else if ( 83 in keysDown ) {
-    if (player.y < canvasElement.height - player.radius) {
-      player.y += player.speed;
-    }
-  } else if ( 65 in keysDown ) {
-    if (player.x > player.radius) {
-      player.x -= player.speed;
-    }
-  } else if ( 68 in keysDown ) {
-    if (player.x < canvasElement.width - player.radius) {
-      player.x += player.speed;
-    }
-  }
-  //SHOOT BUTTON
-  if (32 in keysDown) {
-    player.shoot();
-  }
-  //PLAYER SHOOT
-  player.shoot = function() {
-    if (playerBullets.length < 1) {
-      var bullet = new Bullet();
-      playerBullets.push(bullet);
-    }
-  };
-}
-
-//ENEMY MOVEMENT
-function enemyMovement(){
-  for (var i=0; i<enemies.length; i++) {
-    var enemy = enemies[i];
-    enemy.y += enemy.speed;
-    //this resets enemy if if moves out of screen
-    if (enemy.y > canvasElement.height + enemy.height) {
-      enemy.y = -100;
-      enemy.x = 32 + (Math.random() * (canvasElement.width - 64));
-      lives = lives - 1;
-      console.log(lives);
-    }
-  }
-}
-
-//IF ENEMY & PLAYER TOUCH
-function enemyDetectCollision() {
-  for (var i=0; i<enemies.length; i++) {
-    var enemy = enemies[i];
-    if (
-      player.x <= (enemy.x + 32)
-      && enemy.x <= (player.x + 32)
-      && player.y <= (enemy.y + 32)
-      && enemy.y <= (player.y + 32)
-      ) {
-      enemy.y = -100;
-      enemy.x = 32 + (Math.random() * (canvasElement.width - 64));
-      lives = lives - 1;
-      player.color = "red";
-      console.log(lives);
-    }
-  }
-}
-
-
-
-
-// var player = {
-//   color: "#FFF360",
-//   x: 300,
-//   y: 380,
-//   draw: function() {
-//     canvasContext.fillStyle = this.color;
-//     canvasContext.beginPath(); //starts drawing
-//     canvasContext.moveTo(this.x, this.y);
-//     canvasContext.lineTo(160, 150);
-//     canvasContext.lineTo(30, 150);
-//     canvasContext.closePath(); //ends drawing
-//     canvasContext.fill(); //fills it
-//   }
-// };
+Game.enemiesKilled = 0;
 
 
