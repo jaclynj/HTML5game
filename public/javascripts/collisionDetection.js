@@ -9,10 +9,10 @@
   // end
 //
 function bulletDetectCollision(thisBullet){
-  for (var i=0; i<playerBullets.length; i++) {
-    thisBullet = playerBullets[i];
-    for (var i=0; i<enemies.length; i++) {
-      var enemy = enemies[i];
+  for (var i=0; i<Game.playerBullets.length; i++) {
+    thisBullet = Game.playerBullets[i];
+    for (var i=0; i<Game.enemies.length; i++) {
+      var enemy = Game.enemies[i];
       if (
         thisBullet.x <= (enemy.x + 32) &&
         enemy.x <= (thisBullet.x + 32)
@@ -20,9 +20,9 @@ function bulletDetectCollision(thisBullet){
         && enemy.y <= (thisBullet.y + 32)
         ) {
         enemy.y = -100; // This is separate from the collision
-        enemy.x = 32 + (Math.random() * (canvasElement.width - 64));
-        enemiesKilled += 1;
-        console.log(enemiesKilled);
+        enemy.x = 32 + (Math.random() * (Game.canvas.width - 64));
+        Game.enemiesKilled += 1;
+        console.log(Game.enemiesKilled);
       }
     }
   }
@@ -31,18 +31,18 @@ function bulletDetectCollision(thisBullet){
 
 //IF ENEMY & PLAYER TOUCH
 function enemyDetectCollision() {
-  for (var i=0; i<enemies.length; i++) {
-    var enemy = enemies[i];
+  for (var i=0; i<Game.enemies.length; i++) {
+    var enemy = Game.enemies[i];
     if (
-      player.x <= (enemy.x + 32)
-      && enemy.x <= (player.x + 32)
-      && player.y <= (enemy.y + 32)
-      && enemy.y <= (player.y + 32)
+      Game.player.x <= (enemy.x + 32)
+      && enemy.x <= (Game.player.x + 32)
+      && Game.player.y <= (enemy.y + 32)
+      && enemy.y <= (Game.player.y + 32)
       ) {
       enemy.y = -100;
-      enemy.x = 32 + (Math.random() * (canvasElement.width - 64));
+      enemy.x = 32 + (Math.random() * (Game.canvas.width - 64));
       lives = lives - 1;
-      player.color = "red";
+      Game.player.color = "red";
       console.log(lives);
     }
   }
