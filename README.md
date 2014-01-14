@@ -1,6 +1,7 @@
 HTML5game
 =========
 WORK IN PROGRESS
+
 Teaching myself HTML5 game programming, my first attempt at an HTML5 game with JavaScript. This is an astroids-like arcade shooter.
 
 ###TODO:
@@ -18,4 +19,4 @@ namespace everything
 - better graphics
 - add music
 - high score board when you lose
-- powerups
+- powerups..?
