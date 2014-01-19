@@ -41,9 +41,8 @@ function enemyDetectCollision() {
       ) {
       enemy.y = -100;
       enemy.x = 32 + (Math.random() * (Game.canvas.width - 64));
-      lives = lives - 1;
+      Game.lives = Game.lives - 1;
       Game.player.color = "red";
-      console.log(lives);
     }
   }
 }

@@ -20,6 +20,8 @@ setInterval( function() {
 // UPDATE
 Game.update = function() {
   Game.player.move();
+  Game.enemy1.movement();
+  Game.enemy2.movement();
   Game.bulletMovement(); //moves bullets
   bulletDetectCollision(); //detects if bullet hits enemy
   // Game.enemy.movement();
@@ -32,7 +34,7 @@ Game.draw = function() {
 
   //if player loses
   if (Game.lives < 1) {
-  loseConditions();
+  Game.menu.loseConditions();
   // else render the game normally
   } else {
     Game.menu.draw();
@@ -66,11 +68,11 @@ Game.menu = {
 
 Game.menu.loseConditions = function() {
   Game.context.font="24px Helvetica";
-  Game.context.fillText("GAME OVER",230,canvasElement.height/2);
+  Game.context.fillText("GAME OVER",230,Game.canvas.height/2);
   Game.context.font="18px Helvetica";
-  Game.context.fillText("Press space to play again",200,canvasElement.height/1.8);
-  if (32 in keysDown) {
-    reset();
+  Game.context.fillText("Press space to play again",200, Game.canvas.height/1.8);
+  if (Keys.SPACEBAR in pressed) {
+    Game.reset();
   }
 };
 

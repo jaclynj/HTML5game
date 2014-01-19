@@ -7,12 +7,10 @@ Game.enemy = function() {
   this.width = 20,
   this.height = 20,
   this.speed = 2,
-
   this.draw = function() {
     Game.context.fillStyle = this.color;
     Game.context.fillRect(this.x, this.y, this.width, this.height);
   },
-
   this.movement = function(){
     this.y += this.speed;
       //this resets enemy if it moves out of screen
@@ -22,8 +20,6 @@ Game.enemy = function() {
       Game.lives = Game.lives - 1;
     }
   };
-
-
 }
 
 

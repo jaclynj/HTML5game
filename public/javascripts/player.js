@@ -1,5 +1,4 @@
 //MOVEMENTS
-console.log("in the player fn");
 var pressed = {}; //allows for listening for multiple keypresses so you can move diagnally
 
 var Keys = {
@@ -45,23 +44,6 @@ addEventListener( "keyup", function(key) {
   removeKeyFromPressed(direction);
 });
 
-//PLAYER MOVEMENTS & PREVENTS PLAYER FROM MOVING OFF SCREEN
-
-/*
-
-player.move(LEFT)
-
-function updatePlayerMovement(){
-TODO
-  // keys.pressed("Down")
-  // keys.pressed(Keys.DOWN)
-
-  if (keys.pressed("Down")) {
-    if (player.y > player.radius) {
-      player.move(DOWN)
-    }
-
-*/
 
 //SET PLAYER
 Game.lives = 5;
@@ -107,36 +89,12 @@ Game.player = {
   }
 };
 
-// function playerMovement(){
-//   if (87 in keysDown) {
-//     if (player.y > player.radius) {
-//       player.y -= player.speed;
-//     }
-//   } else if ( 83 in keysDown ) {
-//     if (player.y < canvasElement.height - player.radius) {
-//       player.y += player.speed;
-//     }
-//   } else if ( 65 in keysDown ) {
-//     if (player.x > player.radius) {
-//       player.x -= player.speed;
-//     }
-//   } else if ( 68 in keysDown ) {
-//     if (player.x < canvasElement.width - player.radius) {
-//       player.x += player.speed;
-//     }
-//   }
-
-//keys.DIRECTION takes care of the keybinding
-//maybe an easier way
-//keys.direction = #
-//if
-
 
 //PLAYER SHOOT
 Game.player.shoot = function() {
   if (Game.playerBullets.length < 1) {
     var bullet = new Game.bullet();
-    Game.playerBullets.push(Game.bullet);
+    Game.playerBullets.push(bullet);
   }
 };
 
@@ -154,7 +112,7 @@ Game.bullet = function() {
   this.draw = function() {
     Game.context.fillStyle = this.color;
     Game.context.fillRect(this.x, this.y, this.width, this.height);
-  }
+  };
 };
 
 //MOVES BULLET
