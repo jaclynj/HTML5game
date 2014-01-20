@@ -20,8 +20,7 @@ setInterval( function() {
 // UPDATE
 Game.update = function() {
   Game.player.move();
-  Game.enemy1.movement();
-  Game.enemy2.movement();
+  Game.enemyMovement();
   Game.bulletMovement(); //moves bullets
   Game.bulletDetectCollision(); //detects if bullet hits enemy
   Game.enemyDetectCollision();
@@ -38,8 +37,7 @@ Game.draw = function() {
   } else {
     Game.menu.draw();
     Game.player.draw();
-    Game.enemy1.draw();
-    Game.enemy2.draw();
+    Game.drawEnemies();
 
     //DRAWS BULLETS
     for(var i=0; i<Game.playerBullets.length; i++) {

@@ -15,8 +15,8 @@ Game.bullet = function() {
   this.y = Game.player.y,
   this.width = 5,
   this.height = 8,
-  this.speed = 18,
-  this.range = 100,
+  this.speed = 14,
+  this.range = 220,
   this.draw = function() {
     Game.context.fillStyle = this.color;
     Game.context.fillRect(this.x, this.y, this.width, this.height);
@@ -30,7 +30,7 @@ Game.bulletMovement = function() {
       var thisBullet = Game.playerBullets[i];
       thisBullet.y -= thisBullet.speed;
     //this eliminates bullets that get out of range
-      if (thisBullet.y <= thisBullet.range) {
+      if ( (thisBullet.y) <= (Game.player.y - thisBullet.range) ) {
         Game.playerBullets.splice(i, i+1);
       }
     }

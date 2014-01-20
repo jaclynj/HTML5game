@@ -1,4 +1,6 @@
 //SET MENU
+Game.lives = 5;
+
 Game.menu = {
   draw: function(){
     Game.context.font="24px Helvetica";
@@ -28,6 +30,21 @@ Game.enemy2 = new Game.enemy();
 
 Game.enemies.push(Game.enemy1);
 Game.enemies.push(Game.enemy2);
+
+//MOVE ENEMIES
+Game.enemyMovement = function() {
+  for (var i=0; i<Game.enemies.length; i++) {
+    var enemy = Game.enemies[i];
+    enemy.movement();
+  }
+};
+
+Game.drawEnemies = function() {
+  for (var i=0; i<Game.enemies.length; i++) {
+    var enemy = Game.enemies[i];
+    enemy.draw();
+  }
+}
 
 //RESETS GAME
 Game.reset =function() {

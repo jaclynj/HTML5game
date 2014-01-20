@@ -1,6 +1,4 @@
 //SET PLAYER
-Game.lives = 5;
-
 Game.player = {
   color: "#FFF360",
   x: 300,
