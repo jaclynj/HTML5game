@@ -17,7 +17,6 @@ Game.player = {
     Game.context.fill(); //fills it
   },
   move: function() {
-    //SHOOT BUTTON
     if (Keys.SPACEBAR in pressed) {
       Game.player.shoot();
     }

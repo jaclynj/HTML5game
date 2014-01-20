@@ -21,7 +21,6 @@ Game.gameOverScreen = function() {
   }
 };
 
-
 //RESETS GAME
 Game.reset =function() {
   Game.player.x = 300;

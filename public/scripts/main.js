@@ -1,11 +1,11 @@
 require([
-  "game/game",
+  "game/gameContext",
   "game/movement",
   "game/player",
   "game/bullets",
-  "game/enemy",
+  "game/enemies",
   "game/collisionDetection",
-  "game/set"
+  "game/gameSettings"
   ],
   function () {
 });

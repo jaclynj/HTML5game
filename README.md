@@ -9,9 +9,9 @@ Teaching myself HTML5 game programming, my first attempt at an HTML5 game with J
 - [DONE] make lose conditions/health (if you get hit a certain amount of times the game resets)
 - [DONE] Display score and lives on screen
 - [DONE] Display 'GAME OVER' and press space to start
-namespace everything
-- Refactor so future games are easier
-- Refactor enemy spawning
+- [DONE] namespace everything
+- [DONE] Refactor so future games are easier
+- [DONE] Refactor enemy spawning
 - Display 'READY', 'BEGIN',
 - spawn more enemies with time
 - faster enemies with time
