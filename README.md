@@ -14,7 +14,7 @@ Teaching myself HTML5 game programming, my first attempt at an HTML5 game with J
 - [DONE] Refactor enemy spawning
 - [DONE] faster enemies as game progresses
 - Display 'READY', 'BEGIN'
-- spawn more enemies with time
+- spawn more enemies/different enemy types
 - pause
 - make win conditions (?) big boss?
 - add music
