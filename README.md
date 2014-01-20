@@ -12,9 +12,9 @@ Teaching myself HTML5 game programming, my first attempt at an HTML5 game with J
 - [DONE] namespace everything
 - [DONE] Refactor so future games are easier
 - [DONE] Refactor enemy spawning
-- Display 'READY', 'BEGIN',
+- [DONE] faster enemies as game progresses
+- Display 'READY', 'BEGIN'
 - spawn more enemies with time
-- faster enemies with time
 - pause
 - make win conditions (?) big boss?
 - add music

@@ -19,6 +19,7 @@ Game.bulletDetectCollision = function(){
       if ( Game.collision(thisBullet, enemy) ) {
         Game.resetEnemy(enemy);
         Game.enemiesKilled += 1;
+        Game.difficulty();
       }
     }
   }

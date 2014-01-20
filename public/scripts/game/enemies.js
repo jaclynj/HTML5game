@@ -25,7 +25,21 @@ Game.enemy = function() {
 Game.resetEnemy = function(enemy){
   enemy.y = -100;
   enemy.x = 32 + (Math.random() * (Game.canvas.width - 64));
-  enemy.speed = 2;
+};
+
+Game.newGameEnemyReset = function() {
+  for (var i=0; i<Game.enemies.length; i++) {
+    var enemy = Game.enemies[i];
+    enemy.speed = 2;
+    Game.resetEnemy(enemy);
+  }
+};
+
+Game.speedUpEnemies = function() {
+  for (var i=0; i<Game.enemies.length; i++) {
+    var enemy = Game.enemies[i];
+    enemy.speed += 1;
+  }
 };
 
 // SET ENEMIES

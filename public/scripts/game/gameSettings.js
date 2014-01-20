@@ -28,9 +28,11 @@ Game.reset =function() {
   Game.player.color = "#FFF360";
   Game.lives = 5;
   Game.enemiesKilled = 0;
-  Game.resetEnemy(Game.enemy1);
-  Game.resetEnemy(Game.enemy2);
-  enemies = [];
-  enemies.push(Game.enemy1);
-  enemies.push(Game.enemy2);
+  Game.newGameEnemyReset();
+};
+
+Game.difficulty = function() {
+  if (Game.enemiesKilled > 1 && Game.enemiesKilled % 6 === 0) {
+    Game.speedUpEnemies();
+  }
 };
