@@ -2,8 +2,8 @@ var Game = Game || {};
 
 //DEFINES THE CANVAS
 Game.canvas = document.getElementById("myCanvas");
-if (Game.canvas.getContext){
-Game.context = Game.canvas.getContext("2d"); //this is the context, in this case, 2D
+if (Game.canvas.getContext) {
+  Game.context = Game.canvas.getContext("2d"); //this is the context, in this case, 2D
 }
 Game.canvas.width = 600;
 Game.canvas.height = 550;
@@ -23,9 +23,8 @@ Game.update = function() {
   Game.enemy1.movement();
   Game.enemy2.movement();
   Game.bulletMovement(); //moves bullets
-  bulletDetectCollision(); //detects if bullet hits enemy
-  // Game.enemy.movement();
-  enemyDetectCollision();
+  Game.bulletDetectCollision(); //detects if bullet hits enemy
+  Game.enemyDetectCollision();
 };
 
 //DRAW
@@ -49,33 +48,3 @@ Game.draw = function() {
     }
   }
 };
-
-// * FUNCTIONS & VARIABLES THAT SET OBJECTS *
-
-//SET MENU
-
-Game.menu = {
-  draw: function(){
-    Game.context.font="24px Helvetica";
-    Game.context.fillStyle="#063FFF";
-    Game.context.fillText("Lives: "+Game.lives+" | Kills: "+Game.enemiesKilled, 15, 30);
-  }
-};
-
-//* GAME UPDATE FUNCTIONS *
-
-//LOSE CONDITIONS
-
-Game.menu.loseConditions = function() {
-  Game.context.font="24px Helvetica";
-  Game.context.fillText("GAME OVER",230,Game.canvas.height/2);
-  Game.context.font="18px Helvetica";
-  Game.context.fillText("Press space to play again",200, Game.canvas.height/1.8);
-  if (Keys.SPACEBAR in pressed) {
-    Game.reset();
-  }
-};
-
-// SET ENEMIES
-Game.enemies = [];
-

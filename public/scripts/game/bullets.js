@@ -1,6 +1,6 @@
 //PLAYER SHOOT
 Game.player.shoot = function() {
-  if (Game.playerBullets.length < 1) {
+  if (Game.playerBullets.length < 1 ) {
     var bullet = new Game.bullet();
     Game.playerBullets.push(bullet);
   }
@@ -15,7 +15,7 @@ Game.bullet = function() {
   this.y = Game.player.y,
   this.width = 5,
   this.height = 8,
-  this.speed = 15,
+  this.speed = 18,
   this.range = 100,
   this.draw = function() {
     Game.context.fillStyle = this.color;
@@ -30,9 +30,8 @@ Game.bulletMovement = function() {
       var thisBullet = Game.playerBullets[i];
       thisBullet.y -= thisBullet.speed;
     //this eliminates bullets that get out of range
-      if (thisBullet.y < thisBullet.range) {
+      if (thisBullet.y <= thisBullet.range) {
         Game.playerBullets.splice(i, i+1);
-        Game.playerBullets.splice(3, Game.playerBullets.length);
       }
     }
   }

@@ -9,7 +9,7 @@ var Keys = {
   SPACEBAR: 32
 };
 
-function setDirection(key) {
+Game.setDirection = function(key) {
   var direction;
   if (key.keyCode == Keys.DOWN) {
     direction = Keys.DOWN;
@@ -23,24 +23,24 @@ function setDirection(key) {
     direction = Keys.SPACEBAR;
   }
   return direction;
-}
+};
 
-function addKeyToPressed(direction) {
+Game.addKeyToPressed = function(direction) {
   pressed[direction] = true;
-}
+};
 
-function removeKeyFromPressed(key) {
+Game.removeKeyFromPressed = function(key) {
   delete pressed[key];
-}
+};
 
 //EVENT LISTENERS
 addEventListener( "keydown", function(key) {
-  var direction = setDirection(key);
-  addKeyToPressed(direction);
+  var direction = Game.setDirection(key);
+  Game.addKeyToPressed(direction);
 });
 
 addEventListener( "keyup", function(key) {
-  var direction = setDirection(key);
-  removeKeyFromPressed(direction);
+  var direction = Game.setDirection(key);
+  Game.removeKeyFromPressed(direction);
 });
 

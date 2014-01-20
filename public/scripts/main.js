@@ -5,7 +5,7 @@ require([
   "game/bullets",
   "game/enemy",
   "game/collisionDetection",
-  "game/script"
+  "game/set"
   ],
   function () {
 });
