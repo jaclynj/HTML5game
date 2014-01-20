@@ -1,6 +1,7 @@
-//SET MENU
+//SET LIVES
 Game.lives = 5;
 
+//SET MENU
 Game.menu = {
   draw: function(){
     Game.context.font="24px Helvetica";
@@ -10,7 +11,7 @@ Game.menu = {
 };
 
 //LOSE CONDITIONS
-Game.menu.loseConditions = function() {
+Game.gameOverScreen = function() {
   Game.context.font="24px Helvetica";
   Game.context.fillText("GAME OVER",230,Game.canvas.height/2);
   Game.context.font="18px Helvetica";
@@ -20,31 +21,6 @@ Game.menu.loseConditions = function() {
   }
 };
 
-// SET ENEMIES
-Game.enemies = [];
-Game.enemiesKilled = 0;
-
-//SET ENEMY
-Game.enemy1 = new Game.enemy();
-Game.enemy2 = new Game.enemy();
-
-Game.enemies.push(Game.enemy1);
-Game.enemies.push(Game.enemy2);
-
-//MOVE ENEMIES
-Game.enemyMovement = function() {
-  for (var i=0; i<Game.enemies.length; i++) {
-    var enemy = Game.enemies[i];
-    enemy.movement();
-  }
-};
-
-Game.drawEnemies = function() {
-  for (var i=0; i<Game.enemies.length; i++) {
-    var enemy = Game.enemies[i];
-    enemy.draw();
-  }
-}
 
 //RESETS GAME
 Game.reset =function() {

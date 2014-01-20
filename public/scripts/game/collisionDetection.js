@@ -10,6 +10,7 @@ Game.collision = function(obj1, obj2) {
   }
 };
 
+//IF PLAYER & BULLET TOUCH
 Game.bulletDetectCollision = function(){
   for (var i=0; i<Game.playerBullets.length; i++) {
     var thisBullet = Game.playerBullets[i];

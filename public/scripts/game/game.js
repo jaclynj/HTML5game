@@ -2,15 +2,20 @@ var Game = Game || {};
 
 //DEFINES THE CANVAS
 Game.canvas = document.getElementById("myCanvas");
+
+//SETS THE CONTEXT
 if (Game.canvas.getContext) {
   Game.context = Game.canvas.getContext("2d"); //this is the context, in this case, 2D
 }
+
+//SETS WIDTH AND HEIGHT
 Game.canvas.width = 600;
 Game.canvas.height = 550;
 
 //FRAMES PER SECOND
 Game.FPS = 60;
-//setInterval is a function that calls update & draw
+
+//SETS HOW OFTEN UPDATE AND DRAW ARE CALLED PER SECOND
 setInterval( function() {
   Game.update();
   Game.draw();
@@ -29,20 +34,14 @@ Game.update = function() {
 //DRAW
 Game.draw = function() {
   Game.context.clearRect(0, 0, Game.canvas.width, Game.canvas.height);
-
-  //if player loses
-  if (Game.lives < 1) {
-  Game.menu.loseConditions();
-  // else render the game normally
-  } else {
+  //IF PLAYER HAS LIVES
+  if (Game.lives >= 1) {
     Game.menu.draw();
     Game.player.draw();
     Game.drawEnemies();
-
-    //DRAWS BULLETS
-    for(var i=0; i<Game.playerBullets.length; i++) {
-      var thisBullet = Game.playerBullets[i];
-      thisBullet.draw();
-    }
+    Game.drawBullets();
+  // ELSE SHOW GAME OVER
+  } else {
+    Game.gameOverScreen();
   }
 };

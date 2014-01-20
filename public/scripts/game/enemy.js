@@ -1,4 +1,4 @@
-//SETS ENEMY
+//CREATE ENEMY
 Game.enemy = function() {
 
   this.color = "#063FFF",
@@ -25,5 +25,32 @@ Game.enemy = function() {
 Game.resetEnemy = function(enemy){
   enemy.y = -100;
   enemy.x = 32 + (Math.random() * (Game.canvas.width - 64));
+};
+
+// SET ENEMIES
+Game.enemies = [];
+Game.enemiesKilled = 0;
+
+//SET ENEMY
+Game.enemy1 = new Game.enemy();
+Game.enemy2 = new Game.enemy();
+
+Game.enemies.push(Game.enemy1);
+Game.enemies.push(Game.enemy2);
+
+//MOVE ENEMIES
+Game.enemyMovement = function() {
+  for (var i=0; i<Game.enemies.length; i++) {
+    var enemy = Game.enemies[i];
+    enemy.movement();
+  }
+};
+
+//DRAW ENEMIES
+Game.drawEnemies = function() {
+  for (var i=0; i<Game.enemies.length; i++) {
+    var enemy = Game.enemies[i];
+    enemy.draw();
+  }
 };
 

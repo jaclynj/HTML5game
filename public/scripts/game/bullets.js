@@ -36,3 +36,11 @@ Game.bulletMovement = function() {
     }
   }
 };
+
+//DRAWS BULLETS
+Game.drawBullets = function() {
+  for(var i=0; i<Game.playerBullets.length; i++) {
+    var thisBullet = Game.playerBullets[i];
+    thisBullet.draw();
+  }
+};
