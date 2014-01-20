@@ -8,9 +8,9 @@
   //   }
   // end
 //
-function bulletDetectCollision(thisBullet){
+function bulletDetectCollision(){
   for (var i=0; i<Game.playerBullets.length; i++) {
-    thisBullet = Game.playerBullets[i];
+    var thisBullet = Game.playerBullets[i];
     for (var i=0; i<Game.enemies.length; i++) {
       var enemy = Game.enemies[i];
       if (
@@ -19,10 +19,8 @@ function bulletDetectCollision(thisBullet){
         && thisBullet.y <= (enemy.y + 32)
         && enemy.y <= (thisBullet.y + 32)
         ) {
-        enemy.y = -100; // This is separate from the collision
-        enemy.x = 32 + (Math.random() * (Game.canvas.width - 64));
+        Game.resetEnemy(enemy);
         Game.enemiesKilled += 1;
-        console.log(Game.enemiesKilled);
       }
     }
   }
@@ -39,8 +37,7 @@ function enemyDetectCollision() {
       && Game.player.y <= (enemy.y + 32)
       && enemy.y <= (Game.player.y + 32)
       ) {
-      enemy.y = -100;
-      enemy.x = 32 + (Math.random() * (Game.canvas.width - 64));
+      Game.resetEnemy(enemy);
       Game.lives = Game.lives - 1;
       Game.player.color = "red";
     }

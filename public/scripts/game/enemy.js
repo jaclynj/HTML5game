@@ -20,6 +20,10 @@ Game.enemy = function() {
       Game.lives = Game.lives - 1;
     }
   };
-}
+};
 
+Game.resetEnemy = function(enemy){
+  enemy.y = -100;
+  enemy.x = 32 + (Math.random() * (Game.canvas.width - 64));
+};
 

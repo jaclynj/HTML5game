@@ -6,7 +6,7 @@ if (Game.canvas.getContext){
 Game.context = Game.canvas.getContext("2d"); //this is the context, in this case, 2D
 }
 Game.canvas.width = 600;
-Game.canvas.height = 450;
+Game.canvas.height = 550;
 
 //FRAMES PER SECOND
 Game.FPS = 60;

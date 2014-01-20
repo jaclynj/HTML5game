@@ -11,6 +11,7 @@ Teaching myself HTML5 game programming, my first attempt at an HTML5 game with J
 - [DONE] Display 'GAME OVER' and press space to start
 namespace everything
 - Refactor so future games are easier
+- Refactor enemy spawning
 - Display 'READY', 'BEGIN',
 - spawn more enemies with time
 - faster enemies with time
