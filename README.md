@@ -17,7 +17,7 @@ Teaching myself HTML5 game programming, my first attempt at an HTML5 game with J
 - faster enemies with time
 - pause
 - make win conditions (?) big boss?
-- better graphics
 - add music
+- better graphics
 - high score board when you lose
 - powerups..?
