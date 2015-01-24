@@ -3,6 +3,9 @@ var Game = Game || {};
 //DEFINES THE CANVAS
 Game.canvas = document.getElementById("myCanvas");
 
+//AUDIO
+Game.music = document.getElementById("backgroundMusic");
+
 //SETS THE CONTEXT
 if (Game.canvas.getContext) {
   Game.context = Game.canvas.getContext("2d"); //this is the context, in this case, 2D
@@ -40,8 +43,20 @@ Game.draw = function() {
     Game.player.draw();
     Game.drawEnemies();
     Game.drawBullets();
+    Game.playMusic();
   // ELSE SHOW GAME OVER
   } else {
     Game.gameOverScreen();
+    Game.pauseMusic();
   }
+};
+
+//PLAY MUSIC
+
+Game.playMusic = function() {
+  Game.music.play();
+};
+
+Game.pauseMusic = function() {
+  Game.music.pause();
 };
