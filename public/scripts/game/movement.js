@@ -6,7 +6,8 @@ var Keys = {
   UP: 87,
   LEFT: 65,
   RIGHT: 68,
-  SPACEBAR: 32
+  SPACEBAR: 32,
+  ENTER: 13
 };
 
 Game.setDirection = function(key) {
@@ -21,6 +22,8 @@ Game.setDirection = function(key) {
     direction = Keys.RIGHT;
   } else if (key.keyCode == Keys.SPACEBAR) {
     direction = Keys.SPACEBAR;
+  } else if (key.keyCode == Keys.ENTER) {
+    direction = Keys.ENTER;
   }
   return direction;
 };

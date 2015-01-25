@@ -43,15 +43,17 @@ Game.speedUpEnemies = function() {
 };
 
 // SET ENEMIES
-Game.enemies = [];
-Game.enemiesKilled = 0;
+  Game.enemies = [];
+  Game.enemiesKilled = 0;
 
 //SET ENEMY
-Game.enemy1 = new Game.enemy();
-Game.enemy2 = new Game.enemy();
+Game.setEnemies = function() {
+  Game.enemy1 = new Game.enemy();
+  Game.enemy2 = new Game.enemy();
 
-Game.enemies.push(Game.enemy1);
-Game.enemies.push(Game.enemy2);
+  Game.enemies.push(Game.enemy1);
+  Game.enemies.push(Game.enemy2);
+};
 
 //MOVE ENEMIES
 Game.enemyMovement = function() {

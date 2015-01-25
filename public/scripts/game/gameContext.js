@@ -12,11 +12,12 @@ if (Game.canvas.getContext) {
 }
 
 //SETS WIDTH AND HEIGHT
-Game.canvas.width = 600;
+Game.canvas.width = 300;
 Game.canvas.height = 550;
 
 //FRAMES PER SECOND
 Game.FPS = 60;
+Game.first_play = true;
 
 //SETS HOW OFTEN UPDATE AND DRAW ARE CALLED PER SECOND
 setInterval( function() {
@@ -37,8 +38,12 @@ Game.update = function() {
 //DRAW
 Game.draw = function() {
   Game.context.clearRect(0, 0, Game.canvas.width, Game.canvas.height);
-  //IF PLAYER HAS LIVES
-  if (Game.lives >= 1) {
+  
+  //START GAME
+  if (Game.first_play) {
+    Game.gameStartScreen();
+    //IF PLAYER HAS LIVES
+  } else if (Game.lives >= 1) {
     Game.menu.draw();
     Game.player.draw();
     Game.drawEnemies();

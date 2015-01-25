@@ -10,13 +10,25 @@ Game.menu = {
   }
 };
 
+Game.gameStartScreen = function() {
+  Game.context.fillStyle="#FFF360";
+  Game.context.font="24px Helvetica";
+  Game.context.fillText("Press [ENTER] to play",30,Game.canvas.height/2);
+  if (Keys.ENTER in pressed) {
+    Game.reset();
+    Game.first_play = false;
+  }
+};
+
 //LOSE CONDITIONS
 Game.gameOverScreen = function() {
+  Game.enemies = [];
   Game.context.font="24px Helvetica";
-  Game.context.fillText("GAME OVER",230,Game.canvas.height/2);
+  Game.context.fillText("GAME OVER",80,Game.canvas.height/2);
   Game.context.font="18px Helvetica";
-  Game.context.fillText("Press space to play again",200, Game.canvas.height/1.8);
-  if (Keys.SPACEBAR in pressed) {
+  Game.context.fillText("Your score was: " + Game.enemiesKilled,70, Game.canvas.height/1.8);
+  Game.context.fillText("Press ENTER to play again",50, Game.canvas.height/1.7);
+  if (Keys.ENTER in pressed) {
     Game.reset();
   }
 };
@@ -28,6 +40,8 @@ Game.reset =function() {
   Game.player.color = "#FFF360";
   Game.lives = 5;
   Game.enemiesKilled = 0;
+  Game.setEnemies();
+  Game.playMusic();
   Game.newGameEnemyReset();
 };
 

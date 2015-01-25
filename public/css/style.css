@@ -10,6 +10,7 @@ body {
 canvas {
 /*  background: transparent;*/
   background-color: #403337;
+  background: url("../images/space_bg.jpg") repeat;
   border: 3px solid #599FB2;
   border-radius: 5px;
 }
