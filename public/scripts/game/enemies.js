@@ -4,12 +4,31 @@ Game.enemy = function() {
   this.color = "#063FFF",
   this.x = 32 + (Math.random() * (Game.canvas.width - 64)),
   this.y = -10,
-  this.width = 20,
-  this.height = 20,
+  this.width = 40,
+  this.height = 40,
   this.speed = 2,
+  this.asteroidNumber = 0,
+  this.asteroidRun = 0,
   this.draw = function() {
-    Game.context.fillStyle = this.color;
-    Game.context.fillRect(this.x, this.y, this.width, this.height);
+
+    Game.context.drawImage(
+      Game.createAsteroid( this.asteroidNumber ),
+      this.x - 18,
+      this.y,
+      this.width,
+      this.height
+    );
+    Game.context.fill();
+    this.asteroidRun++;
+
+    if ( this.asteroidNumber < 15 && this.asteroidRun > (this.speed) ) {
+      this.asteroidNumber++;
+      this.asteroidRun = 0;
+    } else if ( this.asteroidNumber >= 15) {
+      this.asteroidNumber = 0;
+      this.asteroidRun = 0;
+    }
+
   },
   this.movement = function(){
     this.y += this.speed;

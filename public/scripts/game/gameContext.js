@@ -19,6 +19,25 @@ Game.canvas.height = 550;
 Game.FPS = 60;
 Game.first_play = true;
 
+//IMAGES
+Game.createPlayerImage = function() {
+  var img = new Image();
+  img.src = "public/images/spaceship.png";
+  return img;
+};
+
+Game.createAsteroid = function(number) {
+  var img = new Image();
+  var source;
+  if ( number < 10 ) {
+    source = "public/images/a1000";
+  } else {
+    source = "public/images/a100";
+  }
+  img.src = source + number + ".png";
+  return img;
+};
+
 //SETS HOW OFTEN UPDATE AND DRAW ARE CALLED PER SECOND
 setInterval( function() {
   Game.update();
@@ -38,7 +57,7 @@ Game.update = function() {
 //DRAW
 Game.draw = function() {
   Game.context.clearRect(0, 0, Game.canvas.width, Game.canvas.height);
-  
+
   //START GAME
   if (Game.first_play) {
     Game.gameStartScreen();

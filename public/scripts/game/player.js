@@ -1,19 +1,21 @@
 //SET PLAYER
+
 Game.player = {
-  color: "#FFF360",
-  x: 300,
-  y: 380,
-  radius: 20,
-  width: 20,
-  height: 20,
+  x: 150,
+  y: 460,
+  radius: 35,
+  width: 43,
+  height: 49,
   speed: 6,
+  img: Game.createPlayerImage(),
   draw: function() {
-    Game.context.fillStyle = this.color;
-    Game.context.beginPath(); //starts drawing
-    Game.context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
-    //high point of circle, radius is width of circle,
-    // 0 is start drawing and Math is the circumference, false just means dont draw in wrong direction
-    Game.context.closePath(); //ends drawing
+    Game.context.drawImage(
+      this.img,
+      this.x - 18,
+      this.y,
+      this.width,
+      this.height
+    );
     Game.context.fill(); //fills it
   },
   move: function() {

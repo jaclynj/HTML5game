@@ -1,8 +1,8 @@
 Game.collision = function(obj1, obj2) {
   if ( obj1.x <= (obj2.x + 32)
     && obj2.x <= (obj1.x + 32)
-    && obj1.y <= (obj2.y + 32)
-    && obj2.y <= (obj1.y + 32)
+    && obj1.y <= (obj2.y + 22)
+    && obj2.y <= (obj1.y + 22)
     ){
     return true;
   } else {
@@ -32,7 +32,6 @@ Game.enemyDetectCollision = function() {
     if ( Game.collision(Game.player, enemy) ) {
       Game.resetEnemy(enemy);
       Game.lives = Game.lives - 1;
-      Game.player.color = "red";
     }
   }
 }

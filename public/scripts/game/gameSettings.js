@@ -5,7 +5,6 @@ Game.lives = 5;
 Game.menu = {
   draw: function(){
     Game.context.font="24px Helvetica";
-    Game.context.fillStyle="#063FFF";
     Game.context.fillText("Lives: "+Game.lives+" | Kills: "+Game.enemiesKilled, 15, 30);
   }
 };
@@ -35,8 +34,8 @@ Game.gameOverScreen = function() {
 
 //RESETS GAME
 Game.reset =function() {
-  Game.player.x = 300;
-  Game.player.y = 380;
+  Game.player.x = 138;
+  Game.player.y = 460;
   Game.player.color = "#FFF360";
   Game.lives = 5;
   Game.enemiesKilled = 0;
